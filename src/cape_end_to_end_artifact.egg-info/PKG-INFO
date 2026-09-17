@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: cape-end-to-end-artifact
+Version: 2.0.0
+Summary: Executable AP2 and provenance-aware authorization testbed for CAPE
+License: MIT
+Requires-Python: >=3.11
+License-File: LICENSE
+Requires-Dist: ap2 @ git+https://github.com/google-agentic-commerce/AP2.git@e1ea56db72a6385bce3e5c1112b3a56ce60acb43
+Dynamic: license-file

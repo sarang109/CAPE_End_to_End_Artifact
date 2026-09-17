@@ -1,0 +1,7 @@
+defense,executions,within_model_attacks,unique_within_model_scenarios,unsafe_unique_scenarios,unauthorized_within_model,unauthorized_rate_pct,unauthorized_95ci_low_pct,unauthorized_95ci_high_pct,assumption_break_attacks,unauthorized_assumption_breaks,benign_executions,benign_completions,step_up,mean_queries,mean_query_cost,median_latency_ms,p95_latency_ms
+AP2_ONLY,63,45,15,8,24,53.33,39.08,67.06,6,6,12,12,0,0.0,0.0,3.623,16.68
+MAJORITY,63,45,15,7,21,46.67,32.94,60.92,6,6,12,12,3,3.333,9.333,10.614,64.606
+TTL,63,45,15,2,6,13.33,6.26,26.18,6,0,12,12,0,0.0,0.0,2.793,5.347
+FULL,63,45,15,0,0,0.0,0.0,7.87,6,3,12,9,15,3.333,9.333,14.268,77.412
+CWR,63,45,15,0,0,0.0,0.0,7.87,6,6,12,9,27,1.333,4.19,6.834,44.925
+DFMR,63,45,15,0,0,0.0,0.0,7.87,6,6,12,9,12,1.333,3.81,3.125,45.826

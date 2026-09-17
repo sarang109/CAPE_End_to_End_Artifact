@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cape-end-to-end-artifact"
+version = "2.0.0"
+description = "Executable AP2 and provenance-aware authorization testbed for CAPE"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = [
+  "ap2 @ git+https://github.com/google-agentic-commerce/AP2.git@e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

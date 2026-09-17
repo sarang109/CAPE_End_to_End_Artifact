@@ -1,0 +1,6 @@
+comparison,defense_only_unsafe,dfmr_only_unsafe,discordant_pairs,exact_mcnemar_p
+AP2_ONLY_vs_DFMR,8,0,8,0.0078125
+MAJORITY_vs_DFMR,7,0,7,0.015625
+TTL_vs_DFMR,2,0,2,0.5
+FULL_vs_DFMR,0,0,0,1.0
+CWR_vs_DFMR,0,0,0,1.0

@@ -1,0 +1,19 @@
+{
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "repetitions": 3,
+  "scenario_count": 21,
+  "defenses": [
+    "AP2_ONLY",
+    "MAJORITY",
+    "TTL",
+    "FULL",
+    "CWR",
+    "DFMR"
+  ],
+  "fault_budget": 1,
+  "ap2_commit": "e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+  "paid_api_calls": 0,
+  "network_after_install": "loopback only"
+}
