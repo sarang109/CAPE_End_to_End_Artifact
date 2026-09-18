@@ -1,0 +1,37 @@
+{
+  "drift_sweep": {
+    "calls": 1680
+  },
+  "latency_sweep": {
+    "calls": 7200,
+    "table7_median_ms_at_24_sources": {
+      "FULL": {
+        "0_changed": 0.021,
+        "12_changed": 0.022,
+        "24_changed": 0.021
+      },
+      "AFFECTED": {
+        "0_changed": 0.021,
+        "12_changed": 0.022,
+        "24_changed": 0.022
+      },
+      "RESIDUAL": {
+        "0_changed": 0.021,
+        "12_changed": 0.019,
+        "24_changed": 0.007
+      },
+      "CWR": {
+        "0_changed": 0.03,
+        "12_changed": 0.018,
+        "24_changed": 0.284
+      }
+    }
+  },
+  "durable_state": {
+    "budget_trials": 30,
+    "all_approved_25": true,
+    "all_budget_respected": true,
+    "retain_group_no_extra_payment": true,
+    "release_group_all_extra_payment": true
+  }
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "method": "FULL",
+    "subset": "ALL",
+    "n": 1000,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 35.73,
+    "p95_cost": 42,
+    "mean_queries": 8.0
+  },
+  {
+    "method": "FULL",
+    "subset": "ALLOW",
+    "n": 514,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 35.94,
+    "p95_cost": 43,
+    "mean_queries": 8.0
+  },
+  {
+    "method": "FULL",
+    "subset": "DENY",
+    "n": 486,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 35.508,
+    "p95_cost": 42,
+    "mean_queries": 8.0
+  },
+  {
+    "method": "SEQUENTIAL",
+    "subset": "ALL",
+    "n": 1000,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 10.798,
+    "p95_cost": 17,
+    "mean_queries": 4.244
+  },
+  {
+    "method": "SEQUENTIAL",
+    "subset": "ALLOW",
+    "n": 514,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 10.951,
+    "p95_cost": 17,
+    "mean_queries": 4.259
+  },
+  {
+    "method": "SEQUENTIAL",
+    "subset": "DENY",
+    "n": 486,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 10.636,
+    "p95_cost": 18,
+    "mean_queries": 4.228
+  },
+  {
+    "method": "CWR",
+    "subset": "ALL",
+    "n": 1000,
+    "correct_pct": 51.4,
+    "step_up_pct": 48.6,
+    "mean_cost": 16.186,
+    "p95_cost": 34,
+    "mean_queries": 4.034
+  },
+  {
+    "method": "CWR",
+    "subset": "ALLOW",
+    "n": 514,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 5.097,
+    "p95_cost": 12,
+    "mean_queries": 1.449
+  },
+  {
+    "method": "CWR",
+    "subset": "DENY",
+    "n": 486,
+    "correct_pct": 0.0,
+    "step_up_pct": 100.0,
+    "mean_cost": 27.914,
+    "p95_cost": 36,
+    "mean_queries": 6.767
+  },
+  {
+    "method": "DFMR",
+    "subset": "ALL",
+    "n": 1000,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 5.196,
+    "p95_cost": 10,
+    "mean_queries": 1.22
+  },
+  {
+    "method": "DFMR",
+    "subset": "ALLOW",
+    "n": 514,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 5.249,
+    "p95_cost": 10,
+    "mean_queries": 1.224
+  },
+  {
+    "method": "DFMR",
+    "subset": "DENY",
+    "n": 486,
+    "correct_pct": 100.0,
+    "step_up_pct": 0.0,
+    "mean_cost": 5.14,
+    "p95_cost": 9,
+    "mean_queries": 1.216
+  }
+]
