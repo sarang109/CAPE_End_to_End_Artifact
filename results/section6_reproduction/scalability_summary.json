@@ -1,0 +1,101 @@
+{
+  "scope": "Supplementary scalability stress test for Section 8.4. Extends the 600-instance planning benchmark (Section 6.4/7.2; six domains, six or nine candidates) to domain counts up to 50 and candidate counts up to 18 for CWR. In this range CWR's cost stayed low enough that its resource-limit fallback never actually engaged (see cwr_timing.skipped_resource_limit_instances); DFMR's candidate-driven blow-up does engage its own limit and is where the resource-limit fallback the manuscript recommends (Section 5.4/8.4) is actually exercised below. Does not modify or rerun planning_benchmark.py.",
+  "cwr_timing": {
+    "total_instances": 1080,
+    "solved_instances": 1080,
+    "skipped_resource_limit_instances": 0,
+    "hypothesis_limit": 20000,
+    "timing_by_domain_count_ms": {
+      "6": {
+        "n": 180,
+        "mean_ms": 0.0747,
+        "median_ms": 0.0556,
+        "p95_ms": 0.2259,
+        "max_ms": 0.365
+      },
+      "10": {
+        "n": 180,
+        "mean_ms": 0.2171,
+        "median_ms": 0.0975,
+        "p95_ms": 0.7997,
+        "max_ms": 1.8029
+      },
+      "15": {
+        "n": 180,
+        "mean_ms": 0.419,
+        "median_ms": 0.1582,
+        "p95_ms": 1.7459,
+        "max_ms": 6.146
+      },
+      "20": {
+        "n": 180,
+        "mean_ms": 0.6425,
+        "median_ms": 0.182,
+        "p95_ms": 3.0796,
+        "max_ms": 10.7847
+      },
+      "30": {
+        "n": 180,
+        "mean_ms": 1.0871,
+        "median_ms": 0.2415,
+        "p95_ms": 5.0492,
+        "max_ms": 20.8156
+      },
+      "50": {
+        "n": 180,
+        "mean_ms": 1.5377,
+        "median_ms": 0.2776,
+        "p95_ms": 5.8167,
+        "max_ms": 29.6697
+      }
+    }
+  },
+  "dfmr_timing": {
+    "total_instances": 300,
+    "solved_instances": 240,
+    "skipped_resource_limit_instances": 60,
+    "state_limit_candidates": 9,
+    "timing_by_candidate_count_ms": {
+      "4": {
+        "n": 60,
+        "mean_ms": 1.3612,
+        "median_ms": 1.3129,
+        "max_ms": 2.1542
+      },
+      "6": {
+        "n": 60,
+        "mean_ms": 14.9411,
+        "median_ms": 15.9057,
+        "max_ms": 34.8549
+      },
+      "8": {
+        "n": 60,
+        "mean_ms": 129.6006,
+        "median_ms": 128.8747,
+        "max_ms": 321.9612
+      },
+      "9": {
+        "n": 60,
+        "mean_ms": 386.2754,
+        "median_ms": 228.3457,
+        "max_ms": 1174.649
+      }
+    },
+    "note": "DFMR's exact recurrence branches per remaining candidate regardless of how many provenance domains exist, so its wall-clock cost tracks candidate count, not domain count; the timing sweep therefore varies candidates at fixed, modest domain counts rather than scaling domains as CWR's sweep does."
+  },
+  "correctness_at_scale": {
+    "total_instances": 450,
+    "cwr_exhaustive_agreement": 450,
+    "cwr_exhaustive_agreement_pct": 100.0,
+    "domain_counts_tested": [
+      6,
+      10,
+      15
+    ],
+    "candidate_counts_tested": [
+      8,
+      10,
+      12
+    ]
+  }
+}
