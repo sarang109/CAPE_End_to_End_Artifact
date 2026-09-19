@@ -6,7 +6,7 @@ from dataclasses import replace
 from .algorithms import (
     bilateral_decision,
     cwr_plan,
-    dfmr_choose_next,
+    dfmr_choose_next_bounded,
     positive_certificate,
 )
 from .ap2_flow import AP2Bundle, AP2Harness
@@ -179,7 +179,7 @@ class Gateway:
                     )
                     for sid in stale_ids
                 ]
-                sid = dfmr_choose_next(current, metadata, self.fault_budget)
+                sid = dfmr_choose_next_bounded(current, metadata, self.fault_budget)
                 if sid is None:
                     break
                 obs = self._fetch(sid, cart.sku, queried)

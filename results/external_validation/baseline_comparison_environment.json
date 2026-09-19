@@ -1,0 +1,48 @@
+{
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "machine": "AMD64",
+  "defenses": [
+    "AP2_ONLY",
+    "MAJORITY",
+    "FULL",
+    "CWR",
+    "DFMR",
+    "STATIC_ALLOWLIST",
+    "POLICY_ENGINE",
+    "CAMEL_INSPIRED"
+  ],
+  "cape_defenses": [
+    "AP2_ONLY",
+    "MAJORITY",
+    "FULL",
+    "CWR",
+    "DFMR"
+  ],
+  "baseline_defenses": [
+    "STATIC_ALLOWLIST",
+    "POLICY_ENGINE",
+    "CAMEL_INSPIRED"
+  ],
+  "scenario_count": 10,
+  "scenario_categories": {
+    "known_legitimate": [
+      "CH9300762011623852957",
+      "GB29NWBK60161331926819",
+      "SE3550000000054910000003",
+      "US122000000121212121212",
+      "UK12345678901234567890"
+    ],
+    "known_attacker": [
+      "US133000000121212121212"
+    ],
+    "novel_unregistered": [
+      "FR7630006000011234567890189",
+      "IT60X0542811101000000123456",
+      "NL91ABNAO417164300",
+      "ES9121000418450200051332"
+    ]
+  },
+  "fault_budget": 1,
+  "paid_api_calls": 0
+}

@@ -128,3 +128,33 @@ All servers bind to `127.0.0.1`; all keys are generated for the test run. The de
 ## License and third-party code
 
 Original code is provided under the MIT License. The AP2 SDK is installed from Google's repository and remains under its Apache-2.0 license. The `anthropic`, `openai`, and `google-genai` SDKs are optional third-party dependencies for the frontier-model track, each under its own vendor license, and are not included in this archive.
+
+## Baseline comparison (deterministic, zero API cost)
+
+`src/cape_artifact/baselines.py` adds three practical comparison baselines against the same payee-verification evidence model as `payee_gateway.py`, answering a reviewer request for the strongest practical baselines: `STATIC_ALLOWLIST` (a pinned-version registry snapshot with version invalidation), `POLICY_ENGINE` (a declarative blocklist-then-registry rule evaluator), and `CAMEL_INSPIRED` (a faithful reduction of CaMeL's control/data-separation mechanism — not the published system — to two independently-rooted corroborating sources). `src/cape_artifact/payee_scenarios.py` replaces the single-attacker-IBAN test shape with a three-way corpus — known-legitimate, known-attacker, and novel-unregistered recipients, sourced from AgentDojo's own banking fixture rather than invented — so a defense is credited for genuinely rejecting unfamiliar recipients, not for matching one flagged constant.
+
+Run it (no API key, no cost):
+
+```bash
+.venv/bin/python run_baseline_comparison.py
+```
+
+Writes `baseline_comparison_runs.csv`, `baseline_comparison_summary.csv`, and `baseline_comparison_environment.json` under `results/external_validation/`; see that directory's `README.md` for the full methodology and honest failure modes of each baseline.
+
+## External validation: AgentDojo real attacks
+
+`src/cape_artifact/agentdojo_validation.py` drives real GPT-5-mini and Gemini calls through [AgentDojo](https://github.com/ethz-spylab/agentdojo)'s real, published banking task suite and its real `ImportantInstructionsAttack`, then routes every money-moving tool call the agent actually issues through CAPE's payee gateway. This is real, billed API usage (measured at $0.046 total for the original 54-run baseline) — install `agentdojo`, export `OPENAI_API_KEY` / `GOOGLE_API_KEY`, and run:
+
+```bash
+.venv/bin/python -m pip install -r requirements-external-validation.txt
+export OPENAI_API_KEY=...
+export GOOGLE_API_KEY=...
+.venv/bin/python -m cape_artifact.agentdojo_validation --i-accept-api-costs
+```
+
+Two additional, opt-in comparisons build on the same real attacks:
+
+- `--diverse-payee-scenarios` routes every extracted money call through the three-way payee corpus and all eight defenses (CAPE's five plus the three new baselines) instead of a single attacker/not-attacker boolean, writing `agentdojo_diverse_*` files.
+- `--compare-agentdojo-defenses` reruns the same carrier/injection tasks with AgentDojo's own installed `TransformersBasedPIDetector` defense wrapping the agent pipeline, instead of CAPE's gateway, to measure whether an upstream, agent-framework-native defense would have stopped the same attacks CAPE's payment-boundary gateway catches downstream. Requires `torch`/`transformers` (in `requirements-external-validation.txt`) and downloads a small Hugging Face model on first use.
+
+Both flags share one combined `--max-total-cost-usd` ceiling with the default run (not a separate allowance each) and write new files only — the original `agentdojo_banking_runs.csv`, `agentdojo_gateway_runs.csv`, `agentdojo_summary.csv`, and `agentdojo_environment.json` are unaffected by these two flags. Note, however, that **every invocation of this script, with or without these flags, regenerates its own default output files from a fresh live run** — this is the script's original, pre-existing behavior (there is no dry-run/mock mode for this track), not something introduced by these additions; do not re-run it against `results/external_validation/` if you want to preserve already-committed numbers there. See `results/external_validation/README.md` for full results and methodology.

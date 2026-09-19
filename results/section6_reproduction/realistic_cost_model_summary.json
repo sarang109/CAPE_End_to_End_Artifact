@@ -1,0 +1,56 @@
+{
+  "assumptions": {
+    "latency_median_ms": 150.0,
+    "latency_sigma": 0.6,
+    "failure_probability": 0.02,
+    "retry_latency_multiplier": 2.0,
+    "parallel_defenses": [
+      "CWR",
+      "FULL",
+      "MAJORITY",
+      "TTL"
+    ],
+    "sequential_defenses": [
+      "DFMR"
+    ],
+    "note": "Illustrative simulation, not measured from a real deployment."
+  },
+  "by_defense_simulated_latency_ms": {
+    "AP2_ONLY": {
+      "n": 63,
+      "mean": 0.0,
+      "median": 0.0,
+      "max": 0.0
+    },
+    "CWR": {
+      "n": 63,
+      "mean": 125.964,
+      "median": 0.0,
+      "max": 514.5683
+    },
+    "DFMR": {
+      "n": 63,
+      "mean": 233.6136,
+      "median": 0.0,
+      "max": 1570.0899
+    },
+    "FULL": {
+      "n": 63,
+      "mean": 233.1264,
+      "median": 204.5535,
+      "max": 1179.2522
+    },
+    "MAJORITY": {
+      "n": 63,
+      "mean": 227.2589,
+      "median": 221.9914,
+      "max": 1341.8869
+    },
+    "TTL": {
+      "n": 63,
+      "mean": 0.0,
+      "median": 0.0,
+      "max": 0.0
+    }
+  }
+}

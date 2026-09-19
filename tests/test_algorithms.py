@@ -4,6 +4,7 @@ from cape_artifact.algorithms import (
     bilateral_decision,
     cwr_plan,
     dfmr_choose_next,
+    dfmr_choose_next_bounded,
     positive_certificate,
 )
 from cape_artifact.models import ALLOW, DENY, STEP_UP, Observation
@@ -45,6 +46,22 @@ class AlgorithmTests(unittest.TestCase):
             obs("independent-2", True, {"independent-2"}, 4),
         ]
         self.assertEqual(dfmr_choose_next(current, candidates, 1), "independent-1")
+
+    def test_bounded_delegates_unchanged_below_the_limit(self):
+        current = [obs("cached", True, {"shared"}, 0)]
+        candidates = [
+            obs("copy", True, {"shared"}, 1),
+            obs("independent-1", True, {"independent-1"}, 3),
+            obs("independent-2", True, {"independent-2"}, 4),
+        ]
+        self.assertEqual(
+            dfmr_choose_next_bounded(current, candidates, 1, limit=9),
+            dfmr_choose_next(current, candidates, 1),
+        )
+
+    def test_bounded_gives_up_above_the_limit_instead_of_running_the_recurrence(self):
+        candidates = [obs(f"c{i}", True, {f"d{i}"}, 1) for i in range(10)]
+        self.assertIsNone(dfmr_choose_next_bounded([], candidates, 1, limit=9))
 
 
 if __name__ == "__main__":

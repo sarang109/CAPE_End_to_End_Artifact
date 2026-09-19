@@ -1,0 +1,30 @@
+{
+  "scope": "Realized CWR adaptive-replanning cost vs. its own single-shot theoretical minimum (an honest lower bound, not a claim of optimal-adaptive cost). Does not modify gateway.py, payee_gateway.py, algorithms.py, or their results.",
+  "benign": {
+    "total_instances": 360,
+    "resolved_to_allow": 348,
+    "step_up_count": 12,
+    "mean_overhead_ratio": 1.0,
+    "median_overhead_ratio": 1.0,
+    "max_overhead_ratio": 1.0,
+    "mean_wasted_queries": 0
+  },
+  "random": {
+    "total_instances": 360,
+    "resolved_to_allow": 306,
+    "step_up_count": 54,
+    "mean_overhead_ratio": 1.2655,
+    "median_overhead_ratio": 1.0909,
+    "max_overhead_ratio": 3.0,
+    "mean_wasted_queries": 0.9278
+  },
+  "adversarial": {
+    "total_instances": 360,
+    "resolved_to_allow": 266,
+    "step_up_count": 94,
+    "mean_overhead_ratio": 2.0041,
+    "median_overhead_ratio": 1.9091,
+    "max_overhead_ratio": 3.375,
+    "mean_wasted_queries": 4.1361
+  }
+}

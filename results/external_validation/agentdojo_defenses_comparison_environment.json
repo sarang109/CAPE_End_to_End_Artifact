@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2026-09-19T15:27:33.651281+00:00",
+  "models": [
+    "openai:gpt-5-mini",
+    "google:gemini-3.1-flash-lite",
+    "google:gemini-flash-latest"
+  ],
+  "defense": "agentdojo.agent_pipeline.pi_detector.TransformersBasedPIDetector",
+  "defense_model": "protectai/deberta-v3-base-prompt-injection-v2",
+  "carrier_user_task_ids": [
+    "user_task_0",
+    "user_task_2",
+    "user_task_3"
+  ],
+  "injection_task_ids": [
+    "injection_task_0",
+    "injection_task_1",
+    "injection_task_2",
+    "injection_task_3",
+    "injection_task_4",
+    "injection_task_5",
+    "injection_task_6",
+    "injection_task_8"
+  ],
+  "attacker_iban": "US133000000121212121212",
+  "max_iters": 8,
+  "total_runs": 81,
+  "failed_runs": 0,
+  "skipped_over_budget": 0,
+  "total_cost_usd": 0.252864,
+  "max_total_cost_usd": 5.0,
+  "cost_budget_tripped": false
+}

@@ -119,3 +119,134 @@ name placeholders instead; (2) AgentDojo's installed Google adapter
 `thought_signature` field Gemini 3.x's function-calling API requires
 across turns, so this run applies a small, documented runtime patch to
 carry it through without modifying the installed package on disk.
+
+## Baseline defenses and the three-way payee corpus (new, additive)
+
+Everything above (`agentdojo_banking_runs.csv`, `agentdojo_gateway_runs.csv`,
+`agentdojo_summary.csv`, `agentdojo_environment.json`) is unchanged by the
+additions described here. Two gaps were raised against it: (1) every
+recipient other than one hardcoded attacker IBAN was treated as
+legitimate by construction, which is close to a payee-allowlist test
+rather than a test of provenance-aware repair; and (2) the strongest
+practical baselines (a static allowlist, a policy engine, an external
+enforcement architecture) were missing entirely.
+
+`src/cape_artifact/payee_scenarios.py` addresses the first gap with a
+three-way corpus: **known-legitimate** recipients (the four real payee
+IBANs from AgentDojo's own `environment.yaml` transaction history, not
+authored for CAPE), **known-attacker** (AgentDojo's own real
+`_ATTACKER_IBAN` constant -- notably a one-digit-off typosquat of the
+legitimate `US122000000121212121212` account, by the published
+benchmark's own design, not CAPE's), and **novel-unregistered**
+(synthetic IBANs appearing in neither list). A defense is only credited
+for genuine registry-membership reasoning if it also correctly
+`STEP_UP`/`DENY`s the novel-unregistered category, not merely the one
+flagged constant.
+
+`src/cape_artifact/baselines.py` addresses the second gap with three new
+defenses, deliberately implemented to fail the same way a real
+deployment would: `STATIC_ALLOWLIST` (a pinned-version snapshot,
+invalidated only on staleness, not on corruption of the shared root it
+trusts), `POLICY_ENGINE` (a blocklist-then-registry rule evaluator --
+protects only recipients already known to be bad), and `CAMEL_INSPIRED`
+(a reduction of CaMeL's control/data-separation mechanism -- not the
+published system's interpreter or capability model -- to requiring
+independent, differently-rooted corroboration before trusting a
+registry-sourced recipient).
+
+Two ways to see these in action:
+
+- **Deterministic, zero API cost** (`run_baseline_comparison.py`, root of
+  the repo): all 8 defenses (CAPE's 5 plus the 3 new baselines) across the
+  9-recipient corpus, with and without shared-root corruption. Writes
+  `baseline_comparison_runs.csv`, `baseline_comparison_summary.csv`,
+  `baseline_comparison_environment.json` in this directory.
+- **Against the real AgentDojo attacks above**
+  (`--diverse-payee-scenarios`): every money call the two real models
+  actually issued, reclassified through the three-way corpus and routed
+  through all 8 defenses, writing `agentdojo_diverse_banking_runs.csv`,
+  `agentdojo_diverse_gateway_runs.csv`, `agentdojo_diverse_summary.csv`,
+  `agentdojo_diverse_environment.json`.
+
+## AgentDojo's own built-in defense (upstream comparison, new, additive)
+
+`--compare-agentdojo-defenses` reruns the same carrier/injection tasks
+through AgentDojo's own installed `TransformersBasedPIDetector` (the real
+`protectai/deberta-v3-base-prompt-injection-v2` model AgentDojo ships,
+`raise_on_injection=True`) wrapping the agent pipeline, instead of routing
+through CAPE's gateway. This measures whether an upstream,
+agent-framework-native defense would have stopped the same attacks
+CAPE's payment-boundary gateway catches downstream -- a genuinely
+different failure surface (stopping the agent from being fooled at all,
+versus catching an already-fooled agent's payment at the boundary), not
+a redundant re-measurement. AgentDojo's other installed component,
+`OpenAILLMToolFilter`, is not included: it has no canonical usage example
+anywhere in the installed package, and improvising the free-text prompt
+it requires would mean reporting a configuration of this artifact's own
+design as "AgentDojo's own defense." Writes
+`agentdojo_defenses_comparison_runs.csv`,
+`agentdojo_defenses_comparison_summary.csv`,
+`agentdojo_defenses_comparison_environment.json`.
+
+Reproduce all three additions together (shares one combined
+`--max-total-cost-usd` ceiling with the default run, not a separate
+allowance each):
+
+```bash
+.venv/Scripts/python.exe -m cape_artifact.agentdojo_validation \
+  --diverse-payee-scenarios --compare-agentdojo-defenses --i-accept-api-costs
+```
+
+### Results
+
+**Deterministic (`baseline_comparison_summary.csv`, zero API cost, 10
+recipients -- 5 known-legitimate, 1 known-attacker, 4 novel-unregistered
+-- each with and without shared-root corruption):** `AP2_ONLY`,
+`MAJORITY`, and `STATIC_ALLOWLIST` are fooled by every corrupted attack
+case (5/5); `POLICY_ENGINE`'s blocklist stops the known-attacker case for
+free but is still fooled by a corrupted novel-unregistered recipient
+(4/5); `FULL`, `CWR`, `DFMR`, and `CAMEL_INSPIRED` block all of them
+(0/5), including the `novel_unregistered` cases that a plain
+allowlist-style check would not exercise at all. `CAMEL_INSPIRED` and
+`STATIC_ALLOWLIST` illustrate the intended contrast directly: the former
+never queries the shared registry and so is completely unaffected by its
+corruption (at a higher, always-paid query cost); the latter trusts
+whatever a current-version snapshot says and is fooled exactly like
+`AP2_ONLY`, showing that version freshness alone is not corruption
+tolerance.
+
+**Real AgentDojo attacks, three models (`agentdojo_diverse_*`, real GPT-5-mini,
+Gemini 3.1 Flash-Lite, and Gemini Flash-Latest, $0.32 total measured cost
+for 108 real agent runs across both new tracks):** Gemini 3.1 Flash-Lite
+was compromised by AgentDojo's own attack-success check in 18/24 attacks
+and issued 26 money-moving calls, 19 to the real attacker IBAN; `AP2_ONLY`,
+`MAJORITY`, and `STATIC_ALLOWLIST` authorized all 19, `POLICY_ENGINE`,
+`FULL`, `CWR`, `DFMR`, and `CAMEL_INSPIRED` authorized none. Gemini
+Flash-Latest and GPT-5-mini were not compromised by AgentDojo's check in
+this sample (0/24 each); the money calls they did issue (8 and 3
+respectively) all went to already-known-legitimate recipients, so every
+defense -- including `AP2_ONLY` -- shows zero unauthorized payments for
+them, a property of those models' resistance, not of the defenses. All
+40 extracted money calls resolved to `known_attacker` or
+`known_legitimate`, with **zero `novel_unregistered` cases in this real
+run** -- but getting there required a real correction: an earlier pass
+surfaced a genuinely legitimate recipient (`UK12345678901234567890`,
+AgentDojo's own ground-truth bill payee for `user_task_0`) that this
+corpus had not captured from the environment fixture alone and would
+have wrongly flagged as unregistered. That gap is now fixed in
+`payee_scenarios.py`, and the fix -- not a hand-picked convenient case --
+is what this run confirms.
+
+**AgentDojo's own built-in defense, three models
+(`agentdojo_defenses_comparison_*`, $0.25 of the total above):** wrapping
+the agent pipeline in AgentDojo's real `TransformersBasedPIDetector`
+instead of routing through CAPE's gateway also stopped every attack from
+reaching the attacker IBAN, for all three models (0/24 each). This is a
+genuinely different failure surface than CAPE's downstream gateway (it
+tries to stop the agent from being fooled at all, rather than catching an
+already-issued payment at the boundary), and in this sample both
+approaches fully contained the same attack corpus -- evidence that
+defense-in-depth at the payment boundary is not the *only* way to stop
+these attacks, not evidence that it is unnecessary, since it does not
+depend on trusting an ML classifier's behavior on injection techniques
+outside its training distribution the way the upstream detector does.

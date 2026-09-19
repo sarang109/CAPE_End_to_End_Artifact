@@ -38,7 +38,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .algorithms import bilateral_decision, cwr_plan, dfmr_choose_next, positive_certificate
+from .algorithms import bilateral_decision, cwr_plan, dfmr_choose_next_bounded, positive_certificate
 from .models import ALLOW, DENY, STEP_UP, Observation
 
 FAULT_BUDGET = 1
@@ -159,7 +159,7 @@ def route_payee_check(
             planning_metadata = [
                 Observation(o.source_id, o.sku, o.version, False, o.dependencies, o.cost) for o in stale
             ]
-            sid = dfmr_choose_next(current, planning_metadata, FAULT_BUDGET)
+            sid = dfmr_choose_next_bounded(current, planning_metadata, FAULT_BUDGET)
             if sid is None:
                 break
             obs = by_id[sid]

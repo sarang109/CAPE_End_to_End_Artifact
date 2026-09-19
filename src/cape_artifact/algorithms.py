@@ -74,24 +74,19 @@ def residual_hypotheses(
     )
 
 
-def cwr_plan(
-    unchanged_positive: Sequence[Observation],
-    candidates: Sequence[Observation],
-    fault_budget: int,
+def _min_cost_exact_cover(
+    items: list[tuple[str, int, int]], n_hypotheses: int
 ) -> tuple[int, tuple[str, ...]] | None:
-    """Exact minimum-cost all-positive repair plan."""
-    hypotheses = residual_hypotheses(unchanged_positive, candidates, fault_budget)
-    if not hypotheses:
+    """Exact minimum-cost set cover over an `n_hypotheses`-bit hypothesis
+    space, given `items` as `(id, cost, bitmask_of_covered_hypotheses)`
+    triples. Shared by `cwr_plan` (single predicate) and
+    `joint_algorithms.joint_cwr_plan` (multiple simultaneous predicates,
+    over a combined, per-predicate-offset hypothesis space) so both reuse
+    the identical, dominance-pruned, memoized bitmask DP rather than
+    duplicating it.
+    """
+    if n_hypotheses == 0:
         return 0, ()
-
-    items: list[tuple[str, int, int]] = []
-    for obs in sorted(candidates, key=lambda x: x.source_id):
-        mask = 0
-        for i, hypothesis in enumerate(hypotheses):
-            if not hypothesis.intersection(obs.dependencies):
-                mask |= 1 << i
-        if mask:
-            items.append((obs.source_id, obs.cost, mask))
 
     # Safe dominance pruning with stable tie-breaking.
     pruned: list[tuple[str, int, int]] = []
@@ -110,7 +105,7 @@ def cwr_plan(
             pruned.append(item)
     items = pruned
 
-    full_mask = (1 << len(hypotheses)) - 1
+    full_mask = (1 << n_hypotheses) - 1
 
     @lru_cache(maxsize=None)
     def solve(remaining: int) -> tuple[float, tuple[str, ...]]:
@@ -132,6 +127,28 @@ def cwr_plan(
     if cost == inf:
         return None
     return int(cost), plan
+
+
+def cwr_plan(
+    unchanged_positive: Sequence[Observation],
+    candidates: Sequence[Observation],
+    fault_budget: int,
+) -> tuple[int, tuple[str, ...]] | None:
+    """Exact minimum-cost all-positive repair plan."""
+    hypotheses = residual_hypotheses(unchanged_positive, candidates, fault_budget)
+    if not hypotheses:
+        return 0, ()
+
+    items: list[tuple[str, int, int]] = []
+    for obs in sorted(candidates, key=lambda x: x.source_id):
+        mask = 0
+        for i, hypothesis in enumerate(hypotheses):
+            if not hypothesis.intersection(obs.dependencies):
+                mask |= 1 << i
+        if mask:
+            items.append((obs.source_id, obs.cost, mask))
+
+    return _min_cost_exact_cover(items, len(hypotheses))
 
 
 def _state_consistent(observations: Sequence[Observation], fault_budget: int) -> bool:
@@ -212,3 +229,30 @@ def dfmr_choose_next(
         by_id.setdefault(obs.source_id, obs)
     _, source_id = value(key_for(current), tuple(obs.source_id for obs in ordered))
     return source_id
+
+
+def dfmr_choose_next_bounded(
+    current: Sequence[Observation],
+    candidates: Sequence[Observation],
+    fault_budget: int,
+    limit: int = 9,
+) -> str | None:
+    """Resource-bounded `dfmr_choose_next`, safe to call from a real request path.
+
+    `dfmr_choose_next`'s exact minimax recurrence branches over every
+    remaining candidate and is measured (`section6_reproduction/
+    scalability_benchmark.py`, `DFMR_STATE_LIMIT`) to cost roughly an order
+    of magnitude more per +2 candidates, reaching ~0.1-1s/instance at 9
+    candidates. That benchmark's own resource-limit fallback -- give up and
+    let the caller fall back to `STEP_UP` rather than run the recurrence --
+    previously existed only in the benchmark wrapper, not in the actual
+    request path (`gateway.py` / `payee_gateway.py`). This function is that
+    same guard, callable from production code: above `limit` candidates it
+    returns `None` immediately, the same "no further query recommended"
+    signal `dfmr_choose_next` already returns when it can't find one, so
+    every existing caller's STEP_UP-on-`None` handling applies unchanged.
+    Below the limit it delegates to `dfmr_choose_next` verbatim.
+    """
+    if len(candidates) > limit:
+        return None
+    return dfmr_choose_next(current, candidates, fault_budget)

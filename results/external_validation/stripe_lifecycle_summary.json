@@ -1,0 +1,20 @@
+{
+  "amount_cents": 1000,
+  "currency": "usd",
+  "create_confirm_status": "requires_capture",
+  "capture_status": "succeeded",
+  "refund_status": "succeeded",
+  "decline_error_code": "card_declined",
+  "decline_code": "generic_decline",
+  "ledger_idempotent_replay_ok": true,
+  "ledger_idempotency_conflict_raised": true,
+  "ledger_entry_count": 3,
+  "webhook_signature_verifies": true,
+  "webhook_tampered_payload_rejected": true,
+  "livemode_violations": 0,
+  "not_tested_this_session": [
+    "true webhook delivery to a live public endpoint (none available)",
+    "24-hour idempotency-key expiration (cannot elapse within one session)"
+  ],
+  "generated_at_utc": "2026-09-19T16:02:16Z"
+}

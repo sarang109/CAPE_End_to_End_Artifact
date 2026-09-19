@@ -99,6 +99,14 @@ PRICING_USD_PER_MTOK: dict[str, tuple[float, float]] = {
     "openai:gpt-4o": (2.5, 10.0),
     "google:gemini-2.5-pro": (1.25, 10.0),
     "google:gemini-2.5-flash": (0.30, 2.50),
+    # gemini-3.1-flash-lite has no entry: it was used on Google's free
+    # tier elsewhere in this artifact and is genuinely not billed (see
+    # results/external_validation/README.md). gemini-flash-latest is a
+    # rolling alias with no published rate card entry as of this writing;
+    # this rate is a placeholder proxy (same as gemini-2.5-flash) so cost
+    # is tracked as non-zero rather than silently undercounted -- verify
+    # against your provider's actual invoice before relying on it.
+    "google:gemini-flash-latest": (0.30, 2.50),
     "mock:mock-always-safe": (0.0, 0.0),
     "mock:mock-always-compromised": (0.0, 0.0),
     "mock:mock-invalid-output": (0.0, 0.0),
