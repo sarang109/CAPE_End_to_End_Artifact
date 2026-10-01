@@ -1,0 +1,33 @@
+{
+  "certificate_enumeration": {
+    "total_combinations": 92648,
+    "accepted_states": 18528,
+    "accepted_false_predicates": 0
+  },
+  "zero_refresh_enumeration": {
+    "total_residual_subsets": 38416,
+    "agreements": 38416
+  },
+  "assumption_violation_table": [
+    {
+      "fault": "hidden_common_root",
+      "full_unsafe": 1,
+      "cwr_unsafe": 1
+    },
+    {
+      "fault": "silent_version_change",
+      "full_unsafe": 0,
+      "cwr_unsafe": 1
+    },
+    {
+      "fault": "two_roots_corrupted_f1",
+      "full_unsafe": 1,
+      "cwr_unsafe": 1
+    },
+    {
+      "fault": "no_dispatch_binding",
+      "full_unsafe": 1,
+      "cwr_unsafe": 1
+    }
+  ]
+}

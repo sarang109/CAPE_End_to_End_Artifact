@@ -1,0 +1,39 @@
+{
+  "scope": "Denser extension of scalability_benchmark.py: candidates touch up to 25 domains each (vs <=3), domain counts up to 500 (vs 50), fault budgets up to 20 (vs 3). Does not modify or rerun scalability_benchmark.py or planning_benchmark.py.",
+  "total_instances": 480,
+  "solved_instances": 120,
+  "skipped_resource_limit_instances": 360,
+  "hypothesis_limit": 20000,
+  "active_domain_count_median": 100.0,
+  "active_domain_count_max": 377,
+  "timing_by_domain_count_ms": {
+    "50": {
+      "n": 30,
+      "mean_ms": 0.0618,
+      "median_ms": 0.0498,
+      "p95_ms": 0.0979,
+      "max_ms": 0.1628
+    },
+    "100": {
+      "n": 30,
+      "mean_ms": 0.0868,
+      "median_ms": 0.0733,
+      "p95_ms": 0.1244,
+      "max_ms": 0.3145
+    },
+    "200": {
+      "n": 30,
+      "mean_ms": 0.1241,
+      "median_ms": 0.1091,
+      "p95_ms": 0.2303,
+      "max_ms": 0.2476
+    },
+    "500": {
+      "n": 30,
+      "mean_ms": 0.1347,
+      "median_ms": 0.1255,
+      "p95_ms": 0.2083,
+      "max_ms": 0.218
+    }
+  }
+}

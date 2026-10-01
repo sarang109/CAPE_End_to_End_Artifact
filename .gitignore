@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Safety net: API keys must never be committed. Set them as environment
+# variables instead (see README.md); nothing in this repo reads a .env file.
+.env
+.env.*

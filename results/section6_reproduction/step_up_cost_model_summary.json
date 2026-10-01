@@ -1,0 +1,39 @@
+{
+  "assumptions": {
+    "confirmation_latency_median_s": 45.0,
+    "confirmation_latency_sigma": 0.8,
+    "confirmation_success_probability": 0.92,
+    "note": "Illustrative simulation; no real human-confirmation study exists in this artifact."
+  },
+  "total_step_up_rows": 57,
+  "by_defense": {
+    "CWR": {
+      "n": 27,
+      "mean_latency_s": 65.978,
+      "median_latency_s": 39.0912,
+      "resolved_count": 24,
+      "resolved_rate_pct": 88.89
+    },
+    "DFMR": {
+      "n": 12,
+      "mean_latency_s": 69.2218,
+      "median_latency_s": 66.8678,
+      "resolved_count": 11,
+      "resolved_rate_pct": 91.67
+    },
+    "FULL": {
+      "n": 15,
+      "mean_latency_s": 70.5115,
+      "median_latency_s": 46.5039,
+      "resolved_count": 15,
+      "resolved_rate_pct": 100.0
+    },
+    "MAJORITY": {
+      "n": 3,
+      "mean_latency_s": 126.3038,
+      "median_latency_s": 66.4925,
+      "resolved_count": 3,
+      "resolved_rate_pct": 100.0
+    }
+  }
+}

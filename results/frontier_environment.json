@@ -1,0 +1,38 @@
+{
+  "generated_at_utc": "2026-09-18T03:54:28.848313+00:00",
+  "seeds": [
+    7,
+    19,
+    43
+  ],
+  "max_tokens": 32,
+  "temperature": 0.2,
+  "max_retries": 6,
+  "requests_per_minute": 10.0,
+  "total_llm_calls": 228,
+  "failed_llm_calls": 0,
+  "paid_api_calls": 228,
+  "total_cost_usd": 0.006856,
+  "max_total_cost_usd": 10.0,
+  "cost_budget_tripped": false,
+  "skipped_calls_over_budget": 0,
+  "seed_determinism_note": "seed is a repetition index, not a determinism guarantee; only OpenAI and Google advertise best-effort seed support and Anthropic does not support a seed parameter at all.",
+  "models": [
+    {
+      "label": "google:gemini-3.1-flash-lite",
+      "provider": "google",
+      "requested_model_id": "gemini-3.1-flash-lite",
+      "observed_response_models": [
+        "gemini-3.1-flash-lite"
+      ]
+    },
+    {
+      "label": "openai:gpt-5-mini",
+      "provider": "openai",
+      "requested_model_id": "gpt-5-mini",
+      "observed_response_models": [
+        "gpt-5-mini-2025-08-07"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "generated_at_utc": "2026-09-19T15:19:34.473035+00:00",
+  "models": [
+    "openai:gpt-5-mini",
+    "google:gemini-3.1-flash-lite",
+    "google:gemini-flash-latest"
+  ],
+  "carrier_user_task_ids": [
+    "user_task_0",
+    "user_task_2",
+    "user_task_3"
+  ],
+  "injection_task_ids": [
+    "injection_task_0",
+    "injection_task_1",
+    "injection_task_2",
+    "injection_task_3",
+    "injection_task_4",
+    "injection_task_5",
+    "injection_task_6",
+    "injection_task_8"
+  ],
+  "attacker_iban": "US133000000121212121212",
+  "max_iters": 8,
+  "total_agent_runs": 81,
+  "failed_agent_runs": 0,
+  "skipped_over_budget": 0,
+  "total_cost_usd": 0.20808,
+  "max_total_cost_usd": 5.0,
+  "cost_budget_tripped": false,
+  "agentdojo_package": "agentdojo (pip), banking suite v1",
+  "attack_technique": "agentdojo.attacks.important_instructions_attacks.ImportantInstructionsAttack"
+}

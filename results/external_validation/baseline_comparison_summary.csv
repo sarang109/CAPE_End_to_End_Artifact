@@ -1,0 +1,9 @@
+defense,is_cape_defense,executions,corrupted_attack_cases,unauthorized_under_corruption,corrupted_benign_cases,wrongly_blocked_benign_under_corruption,uncorrupted_cases,uncorrupted_unauthorized,novel_unregistered_cases,novel_unregistered_unauthorized,mean_query_cost
+AP2_ONLY,1,20,5,5,5,0,10,5,8,8,0.0
+MAJORITY,1,20,5,5,5,5,10,0,8,4,7.0
+FULL,1,20,5,0,5,0,10,0,8,0,7.0
+CWR,1,20,5,0,5,0,10,0,8,0,6.0
+DFMR,1,20,5,0,5,0,10,0,8,0,6.0
+STATIC_ALLOWLIST,0,20,5,5,5,5,10,0,8,4,1.0
+POLICY_ENGINE,0,20,5,4,5,5,10,0,8,4,0.9
+CAMEL_INSPIRED,0,20,5,0,5,0,10,0,8,0,4.0

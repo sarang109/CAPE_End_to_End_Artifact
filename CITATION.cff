@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: CAPE End-to-End Agentic Payment Authorization Artifact
+message: If you use this artifact, please cite the accompanying manuscript.
+type: software
+authors:
+  - family-names: Kulkarni
+    given-names: Sarang Shrikant
+  - family-names: Kulkarni
+    given-names: Prachi Nandkumar
+version: 2.0.0
+date-released: 2026-09-17
+license: MIT

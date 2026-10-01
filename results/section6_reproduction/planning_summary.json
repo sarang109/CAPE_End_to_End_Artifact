@@ -1,0 +1,24 @@
+{
+  "total_instances": 600,
+  "feasible_instances": 539,
+  "infeasible_instances": 61,
+  "cwr_exhaustive_agreement": 600,
+  "cwr_exhaustive_agreement_pct": 100.0,
+  "greedy_suboptimal_count": 129,
+  "planner_total_cost": {
+    "full": 20854,
+    "sequential": 9407,
+    "greedy": 4087,
+    "cwr": 3829
+  },
+  "planner_mean_cost": {
+    "full": 38.69,
+    "sequential": 17.453,
+    "greedy": 7.583,
+    "cwr": 7.104
+  },
+  "cwr_timing_us": {
+    "median_us": 33.35,
+    "p95_us": 95.1
+  }
+}
