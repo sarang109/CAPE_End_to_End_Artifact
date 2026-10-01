@@ -11,7 +11,7 @@ results -- it only adds two new files: `adaptive_replanning_runs.csv` and
 *given* candidates that will report positive, this is the minimum cost that
 certifies the predicate. `gateway.py`'s actual use of it is adaptive: plan,
 query, and if a source comes back negative or unavailable, replan over what's
-left. A reviewer pass noted the theorem doesn't cover the realized cost of
+left. The theorem doesn't cover the realized cost of
 that full adaptive loop when early guesses are wrong. This benchmark measures
 it directly: for generated instances, a fresh (not imported from
 `gateway.py`) implementation of the same replanning loop runs against a

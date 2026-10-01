@@ -8,7 +8,7 @@ agreement after the refactor), `gateway.py`, or `payee_gateway.py`.
 
 ## Why
 
-A reviewer pass noted real commerce policies often combine several
+Real commerce policies often combine several
 conditions at once (category, merchant, geography, recurring-payment
 status, ...), while this artifact evaluates one boolean predicate at a
 time. Running the existing `cwr_plan`/`dfmr_choose_next` once per predicate

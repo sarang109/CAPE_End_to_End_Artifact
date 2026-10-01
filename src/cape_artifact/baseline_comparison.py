@@ -2,7 +2,7 @@
 new practical baselines (`baselines.py`) over the three-way payee corpus
 (`payee_scenarios.py`).
 
-This is new, supplementary work answering two reviewer gaps at once: (1)
+This is supplementary work covering two gaps at once: (1)
 the missing static-allowlist / policy-engine / CaMeL-inspired comparison
 baselines, and (2) the "looks like a payee-allowlist test" concern, by
 exercising a `NOVEL_UNREGISTERED` category the attacker/legitimate split

@@ -28,7 +28,7 @@ class PayeeScenarioTests(unittest.TestCase):
             self.assertEqual(scenario.recipient_is_legit, expected, scenario)
 
     def test_novel_unregistered_is_not_legit_even_though_not_the_attacker(self):
-        # This is the case the reviewer's "allowlist test" critique targets:
+        # This is the case an "allowlist-only test" critique targets:
         # a recipient that is neither the flagged attacker address nor any
         # known-legitimate payee must still resolve to not-legit.
         for recipient in NOVEL_UNREGISTERED_PAYEES:

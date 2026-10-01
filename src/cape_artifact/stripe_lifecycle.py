@@ -2,7 +2,7 @@
 a decline path, idempotency replay/conflict, and webhook-signature
 verification.
 
-Answers the reviewer gap that no real payment processor was ever tested
+Addresses the gap that no real payment processor was ever tested
 (the AP2 path's settlement is a local, in-memory sandbox --
 `sandbox.py`). Every call here is real and goes to Stripe's actual test-mode
 API (`https://api.stripe.com`) using a real `sk_test_...` key, recorded into

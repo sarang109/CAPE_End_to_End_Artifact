@@ -1,8 +1,8 @@
 """Practical comparison baselines for the payee-verification predicate.
 
-A reviewer pass on the manuscript's AgentDojo external validation
-(`agentdojo_validation.py` / `payee_gateway.py`) asked for the strongest
-practical baselines, naming three specifically: a static payee allowlist
+The manuscript's AgentDojo external validation
+(`agentdojo_validation.py` / `payee_gateway.py`) is compared against the
+strongest practical baselines, three in particular: a static payee allowlist
 with version invalidation, a production-style policy engine, and an
 external enforcement architecture such as CaMeL ("Defeating Prompt
 Injections by Design", Debenedetti et al., 2025). This module implements

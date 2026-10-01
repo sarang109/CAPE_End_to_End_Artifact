@@ -1,6 +1,6 @@
 """Dense provenance-domain scalability stress test, extending `scalability_benchmark.py`.
 
-A reviewer pass on `scalability_benchmark.py` noted that its own configured
+`scalability_benchmark.py`'s own configured
 50-domain instances only touch ~18.5 active domains at the median, since
 `_gen_instance` samples at most 3 domains per candidate observation --
 realistic for this artifact's evidence topologies, but it "does not

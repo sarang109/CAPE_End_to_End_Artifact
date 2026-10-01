@@ -7,7 +7,7 @@ already-published result -- it adds `stripe_lifecycle_runs.csv`,
 
 ## Why
 
-A reviewer pass noted no real payment processor was ever tested: the AP2
+Without this experiment no real payment processor is tested: the AP2
 path's settlement is `sandbox.py`'s in-memory `PaymentSandbox`. This
 experiment exercises a real processor's test-mode API end-to-end --
 authorize, capture, refund, a decline path, idempotency, and webhook

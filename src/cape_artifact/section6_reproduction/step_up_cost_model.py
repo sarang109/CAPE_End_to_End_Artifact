@@ -1,7 +1,7 @@
 """A documented, explicitly SIMULATED human-confirmation cost model for
 STEP_UP, applied post-hoc to the existing deterministic results.
 
-A reviewer pass noted the manuscript never measures the cost of `STEP_UP`
+The manuscript never measures the cost of `STEP_UP`
 itself: how often human confirmation succeeds, or how long it takes. No
 real user study exists in this artifact to draw on, so -- per explicit
 agreement -- this module builds a clearly labeled *simulation* instead of

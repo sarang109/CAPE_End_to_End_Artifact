@@ -5,8 +5,7 @@ single planning call: *given* a set of candidates that will report positive
 if queried, this is the minimum cost that certifies the predicate. The
 manuscript's gateway (`gateway.py` lines ~121-151) uses it *adaptively*:
 plan, query the plan's sources, and if any comes back negative or
-unavailable, replan over the remaining candidates and try again. A reviewer
-pass noted that the theorem's proof covers the single-shot case, not the
+unavailable, replan over the remaining candidates and try again. The theorem's proof covers the single-shot case, not the
 realized cost of this full adaptive loop when early guesses turn out wrong
 -- each wrong guess wastes that source's query cost before a new, smaller
 plan is computed.

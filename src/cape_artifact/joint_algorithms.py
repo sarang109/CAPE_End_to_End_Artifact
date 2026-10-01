@@ -1,7 +1,7 @@
 """Multi-predicate joint evidence planning: generalizing CWR and DFMR from
 one boolean predicate to several simultaneous ones.
 
-A reviewer pass noted that real commerce policies often combine several
+Motivation: real commerce policies often combine several
 conditions at once (category, merchant, geography, recurring-payment
 status, ...), while every predicate in the manuscript is evaluated one at
 a time. Simply running `cwr_plan`/`dfmr_choose_next` once per predicate and

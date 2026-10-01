@@ -1,8 +1,8 @@
 """A three-way payee corpus, replacing the single-attacker-IBAN test shape.
 
-A reviewer pass on the AgentDojo external validation noted that
+The AgentDojo external validation has a limitation:
 `agentdojo_validation.py` classifies every recipient with a single
-comparison, `recipient != ATTACKER_IBAN`, and that every other recipient
+comparison, `recipient != ATTACKER_IBAN`, so every other recipient
 --- however unfamiliar --- is treated as legitimate. Blocking only that
 one designated address does not distinguish real provenance-aware
 repair from a trivial allowlist check.

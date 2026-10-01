@@ -430,7 +430,7 @@ def route_money_calls_diverse(money_calls: list[dict]) -> list[dict]:
 
     A real recipient extracted from an agent trace can now land in
     `known_legitimate`, `known_attacker`, or `novel_unregistered` -- closing
-    the reviewer gap that every non-attacker recipient was treated as
+    the gap that every non-attacker recipient was treated as
     legitimate by construction.
     """
     from . import baselines, payee_scenarios

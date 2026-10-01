@@ -1,7 +1,7 @@
 """A documented, explicitly SIMULATED realistic cost/latency model, applied
 post-hoc to the existing deterministic results.
 
-A reviewer pass noted the manuscript's cost model is dimensionless and
+Motivation: the manuscript's cost model is dimensionless and
 purely additive (`query_cost = sum(source.cost)`, confirmed in
 `gateway.py` line ~199) and does not capture parallel queries,
 network-tail latency, per-source failure probability, or retries. This

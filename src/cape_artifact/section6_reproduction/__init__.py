@@ -1,7 +1,8 @@
-"""Independent reproduction of manuscript sections 6.2-6.6.
+"""Reconstructed generators for manuscript sections 6.2-6.6.
 
-These modules were absent from the original artifact; a reviewer could not
-run them. They are new, additive code that only imports from the existing
+The original generators were unavailable, so these modules were rebuilt from
+the manuscript's method description (see results/section6_reproduction/README.md).
+They are additive code that only imports from the existing
 ``cape_artifact.algorithms`` and ``cape_artifact.models`` modules and does
 not modify anything else in the artifact. They require no network access,
 paid API, or credentials.

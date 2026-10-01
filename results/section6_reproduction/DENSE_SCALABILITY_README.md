@@ -7,8 +7,8 @@ adds two new files: `dense_scalability_timing.csv` and
 
 ## Why
 
-A reviewer pass on `scalability_benchmark.py` (see `SCALABILITY_README.md` in
-this directory) noted that its configured 50-domain instances only touch
+`scalability_benchmark.py` (see `SCALABILITY_README.md` in
+this directory) has a limitation: its configured 50-domain instances only touch
 ~18.5 active domains at the median, since each candidate observation there
 samples at most 3 dependency domains -- realistic for this artifact's
 evidence topologies, but not a demonstration of performance on dense graphs,
@@ -29,7 +29,7 @@ Reproduce with:
 (the union of domains actually touched by at least one observation) has a
 median of 100 and a maximum of 377 -- five to twenty times denser than the
 original sweep's 18.5-domain median, and squarely in the "hundreds of active
-domains" range the reviewer asked for.
+domains" range this benchmark targets.
 
 **The resource-limit fallback engages constantly at this density**, unlike
 the original sweep where it never triggered: 360 of 480 instances (75%) were

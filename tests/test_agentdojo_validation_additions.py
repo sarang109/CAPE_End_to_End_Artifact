@@ -1,4 +1,10 @@
+import importlib.util
 import unittest
+
+# agentdojo is an optional dependency (requirements-external-validation.txt);
+# skip this module rather than error when it is not installed.
+if importlib.util.find_spec("agentdojo") is None:
+    raise unittest.SkipTest("agentdojo is not installed")
 
 from cape_artifact.agentdojo_validation import ATTACKER_IBAN, route_money_calls_diverse
 from cape_artifact.baseline_comparison import ALL_DEFENSES

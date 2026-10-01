@@ -4,7 +4,7 @@
 experiment, and was previously the only function here. The functions
 added below it extend this adapter to cover a real authorize -> capture ->
 refund lifecycle, a decline path, and webhook-signature verification --
-closing the reviewer gap that no real payment processor lifecycle was ever
+closing the gap that no real payment processor lifecycle was ever
 exercised, beyond the single local SQLite-backed sandbox
 (`sandbox.py`, in-memory dict; see `real_payment_ledger.py` for a genuine
 SQLite-backed ledger used alongside these calls).
